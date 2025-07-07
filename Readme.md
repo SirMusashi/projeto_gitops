@@ -27,3 +27,20 @@
 
 ![print do projeto](imagens/image.png)
 
+---
+
+## Passo 2: Instalação do ArgoCD
+
+### Com o repositório GitOps preparado, o próximo passo foi instalar o ArgoCD no cluster Kubernetes local. O ArgoCD será o responsável por automatizar o deploy da aplicação.
+
+1.  Um namespace dedicado foi criado para o ArgoCD, para manter seus componentes isolados:
+    ```bash
+    kubectl create namespace argocd
+    ```
+2.  Em seguida, o manifesto de instalação padrão do ArgoCD foi aplicado a partir da URL oficial do projeto:
+    ```bash
+    kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml
+    ```
+3. Após isso rodei o comando `kubectl get pods -n argocd` e esperei tudo estar com **STATUS Running**
+
+    ![argo01](imagens/argocd_01.jpg)
