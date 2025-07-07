@@ -18,7 +18,7 @@
 
 1.  Um *fork* do repositório oficial [GoogleCloudPlatform/microservices-demo](https://github.com/GoogleCloudPlatform/microservices-demo) foi criado para obter acesso aos arquivos de manifesto da aplicação. 
 
-![fork](imagens/fork.jpg)
+    ![fork](imagens/fork.jpg)
 
 2.  Um novo repositório público, chamado `projeto_gitops`, foi criado para hospedar os manifestos que o ArgoCD irá monitorar. 
 3.  Apenas o arquivo `release/kubernetes-manifests.yaml` do projeto original foi copiado para o novo repositório, seguindo a estrutura de pastas `k8s/online-boutique.yaml`. 
@@ -44,3 +44,26 @@
 3. Após isso rodei o comando `kubectl get pods -n argocd` e esperei tudo estar com **STATUS Running**
 
     ![argo01](imagens/argocd_01.jpg)
+
+---
+
+## Passo 3: Acesso à Interface do ArgoCD
+
+### Com o ArgoCD instalado no cluster, o próximo passo foi acessar sua interface web. Como o serviço não é exposto externamente por padrão, foi utilizado o comando `kubectl port-forward`.
+
+1.  Um túnel de comunicação foi criado entre a porta local `8080` e a porta do serviço `argocd-server` no cluster:
+
+    ```bash
+    kubectl port-forward svc/argocd-server -n argocd 8080:443
+    ```
+2.  A senha inicial do usuário `admin` foi extraída do secret `argocd-initial-admin-secret`:
+
+    ```bash
+    kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath="{.data.password}" | base64 -d
+    ```
+3.  O acesso foi realizado com sucesso através da URL `https://localhost:8080`.
+    Com o login como `admin` e a senha `copiada do resultado do passo anterior` .
+
+    ![arcodcd2](imagens/argocd_02.jpg)
+
+    ![argocd3](imagens/argocd_03.jpg)
