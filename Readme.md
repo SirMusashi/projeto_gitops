@@ -90,3 +90,18 @@
 ### Após a criação, a aplicação foi sincronizada manualmente clicando em `SYNC`. O ArgoCD então aplicou os manifestos do repositório no cluster, criando todos os microserviços da aplicação "Online Boutique".
 
 ![argocd04](imagens/argocd_06.jpg)
+
+---
+
+## Passo 5: Acesso e Validação da Aplicação
+
+### Para acessar a aplicação, cujo serviço de frontend é do tipo `ClusterIP`, foi necessário criar mais um túnel com `port-forward`:
+
+```bash
+kubectl port-forward svc/frontend-external 8090:80
+```
+
+### A aplicação "Online Boutique" ficou acessível no navegador através do endereço `http://localhost:8090`.
+
+![butique](imagens/butiqe_01.jpg)
+
