@@ -67,3 +67,26 @@
     ![arcodcd2](imagens/argocd_02.jpg)
 
     ![argocd3](imagens/argocd_03.jpg)
+
+---
+
+## Passo 4: Criação da Aplicação no ArgoCD
+
+### O passo final da configuração foi criar a "Aplicação" dentro do ArgoCD, que conecta o repositório Git ao cluster Kubernetes.
+
+![argocd04](imagens/argocd_04.jpg)
+
+### A configuração foi feita através da interface web do ArgoCD com os seguintes parâmetros principais:
+- **Application Name:** `online-boutique`
+- **Project Name:** `default`
+- **Sync Policy:** `Manual`
+- **Source Repository URL:** A URL do repositório `projeto_gitops` criado no GitHub.
+- **Source Path:** `k8s`
+- **Destination Cluster:** `https://kubernetes.default.svc` (o cluster local)
+- **Destination Namespace:** `default`
+
+![argocd04](imagens/argocd_05.jpg)
+
+### Após a criação, a aplicação foi sincronizada manualmente clicando em `SYNC`. O ArgoCD então aplicou os manifestos do repositório no cluster, criando todos os microserviços da aplicação "Online Boutique".
+
+![argocd04](imagens/argocd_06.jpg)
