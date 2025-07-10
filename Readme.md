@@ -118,11 +118,11 @@ kubectl port-forward svc/frontend-external 8090:80
 ![yaml01](imagens/mudayaml_02.jpg)
 
 ### 2.  A alteração foi enviada para o repositório no GitHub com um `git push`.
-    ```Bash
-    git add .
-    git commit -m "feat: Escala o microserviço de frontend para 3 réplicas"
-    git push
-    ```
+```Bash
+git add .
+git commit -m "feat: Escala o microserviço de frontend para 3 réplicas"
+git push
+```
 ### 3.  Automaticamente, a interface do ArgoCD indicou que o estado da aplicação estava `OutOfSync`, pois detectou a divergência entre o manifesto no Git e o que estava em execução no cluster.
 ![yaml01](imagens/mudayaml_03.jpg)
 
