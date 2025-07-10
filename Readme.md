@@ -105,3 +105,37 @@ kubectl port-forward svc/frontend-external 8090:80
 
 ![butique](imagens/butiqe_01.jpg)
 
+---
+
+## Passo 6: Validação do Fluxo GitOps
+
+### Para validar o fluxo GitOps de ponta a ponta, foi realizado um teste prático de customização de um manifesto. O objetivo era alterar o número de réplicas de um dos microserviços diretamente no Git e observar o comportamento do ArgoCD.
+
+### 1.  O arquivo `k8s/online-boutique.yaml` foi alterado, mudando o número de `replicas` do `Deployment` do `frontend` de 1 para 3.
+
+![yaml01](imagens/mudayaml_01.jpg)
+
+![yaml01](imagens/mudayaml_02.jpg)
+
+### 2.  A alteração foi enviada para o repositório no GitHub com um `git push`.
+    ```Bash
+    git add .
+    git commit -m "feat: Escala o microserviço de frontend para 3 réplicas"
+    git push
+    ```
+### 3.  Automaticamente, a interface do ArgoCD indicou que o estado da aplicação estava `OutOfSync`, pois detectou a divergência entre o manifesto no Git e o que estava em execução no cluster.
+![yaml01](imagens/mudayaml_03.jpg)
+
+### 4.  Após a sincronização manual no ArgoCD, a plataforma aplicou a mudança, e foi possível verificar que 3 pods do `frontend` estavam em execução no cluster, validando o ciclo completo do GitOps.
+
+![yaml01](imagens/mudayaml_04.jpg)
+
+![yaml01](imagens/mudayaml_06.jpg)
+
+![yaml01](imagens/mudayaml_05.jpg)
+
+## Conclusão
+
+### Este projeto permitiu uma imersão prática na cultura `GitOps`, demonstrando como o `Git` pode ser utilizado como fonte única da verdade para a infraestrutura e aplicações. Utilizando ferramentas como `Kubernetes` , `ArgoCD` e `GitHub`, foi possível implantar e gerenciar um ambiente de microserviços de forma automatizada, versionada, segura e resiliente, simulando como empresas modernas operam em ambientes cloud-native. 
+
+# (:
